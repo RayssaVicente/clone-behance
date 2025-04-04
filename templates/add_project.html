@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Projeto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Behance Clone</div>
+            <ul>
+                <li><a href="/">Explorar</a></li>
+                <li><a href="#">Meus Projetos</a></li>
+                <li><a href="/add"><button>+ Novo Projeto</button></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Adicionar Novo Projeto</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="titulo">Título:</label>
+            <input type="text" name="titulo" required>
+
+            <label for="descricao">Descrição:</label>
+            <textarea name="descricao" required></textarea>
+
+            <label for="categoria">Categoria:</label>
+            <select name="categoria" required>
+                <option value="Design Gráfico">Design Gráfico</option>
+                <option value="Fotografia">Fotografia</option>
+                <option value="Ilustração">Ilustração</option>
+                <option value="Programação">Programação</option>
+            </select>
+
+            <label for="tags">Tags:</label>
+            <input type="text" id="tags" placeholder="Separe com vírgulas">
+
+            <label for="imagem">Imagem:</label>
+            <input type="file" name="imagem" id="imagem" accept="image/*">
+            <img id="preview" alt="Pré-visualização">
+
+            <button type="submit">Salvar</button>
+            <a href="/" class="cancel-button">Cancelar</a>
+        </form>
+    </main>
+
+    <script>
+        // Função para mostrar pré-visualização da imagem
+        document.getElementById("imagem").addEventListener("change", function(event) {
+            let reader = new FileReader();
+            reader.onload = function() {
+                let img = document.getElementById("preview");
+                img.src = reader.result;
+                img.style.display = "block";
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        });
+    </script>
+</body>
+</html>
